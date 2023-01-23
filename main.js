@@ -22,11 +22,20 @@ var ball = {
 }
 
 function setup(){
-  var canvas =  createCanvas(700,600);
+  canvas =  createCanvas(700,600);
+  canvas.center();
+  video = CreateCapture(VIDEO);
+  video.Size(300,300);
+  video.hide();
+ 
+
+  posenet = ml5.poseNet(video,modelLoaded);
+  posenet.on('pose' , gotposes);
 }
 
 
 function draw(){
+  image(video,0,0, 650,450);
 
  background(0); 
 
@@ -51,6 +60,7 @@ function draw(){
    
     //pc computer paddle
     fill("#FFA500");
+
     stroke("#FFA500");
    var paddle2y =ball.y-paddle2Height/2;  rect(paddle2Y,paddle2y,paddle2,paddle2Height,100);
     
